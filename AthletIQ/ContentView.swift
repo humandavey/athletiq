@@ -10,16 +10,16 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [WorkoutItem]
+    @Query private var workouts: [Workout]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(workouts) { workout in
                     NavigationLink {
-                        Text(item.type.rawValue)
+                        StartWorkoutView(workout: workout)
                     } label: {
-                        Text(item.type.rawValue)
+                        Text(workout.name)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -29,8 +29,10 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    NavigationLink {
+                        CreateWorkoutView()
+                    } label: {
+                        Label("Create Workout", systemImage: "plus")
                     }
                 }
             }
@@ -39,17 +41,17 @@ struct ContentView: View {
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = WorkoutItem(type: .timed, value: 4)
-            modelContext.insert(newItem)
-        }
-    }
+//    private func addItem() {
+//        withAnimation {
+//            let newItem = WorkoutItem(type: .timed, value: 4)
+//            modelContext.insert(newItem)
+//        }
+//    }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(workouts[index])
             }
         }
     }
