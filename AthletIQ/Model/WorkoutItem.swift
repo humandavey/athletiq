@@ -8,17 +8,21 @@
 import Foundation
 import SwiftData
 
-enum WorkoutType: String, Codable {
-    case timed = "Timed"
+enum WorkoutType: String, Codable, CaseIterable, Identifiable {
+    case timed = "Seconds"
     case reps = "Reps"
+    
+    var id: Self { self }
 }
 
 @Model
 final class WorkoutItem {
+    var name: String
     var type: WorkoutType
-    var value: Double
+    var value: Int
     
-    init(type: WorkoutType, value: Double) {
+    init(name: String, type: WorkoutType, value: Int) {
+        self.name = name
         self.type = type
         self.value = value
     }

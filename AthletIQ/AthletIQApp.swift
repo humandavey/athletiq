@@ -12,6 +12,7 @@ import SwiftData
 struct AthletIQApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
+            Workout.self,
             WorkoutItem.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

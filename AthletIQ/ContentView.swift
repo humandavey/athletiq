@@ -13,7 +13,7 @@ struct ContentView: View {
     @Query private var workouts: [Workout]
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
                 ForEach(workouts) { workout in
                     NavigationLink {
@@ -25,9 +25,6 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
                 ToolbarItem {
                     NavigationLink {
                         CreateWorkoutView()
@@ -36,17 +33,9 @@ struct ContentView: View {
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
+            .navigationTitle("Workouts")
         }
     }
-
-//    private func addItem() {
-//        withAnimation {
-//            let newItem = WorkoutItem(type: .timed, value: 4)
-//            modelContext.insert(newItem)
-//        }
-//    }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

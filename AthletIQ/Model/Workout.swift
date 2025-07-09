@@ -11,10 +11,14 @@ import SwiftData
 @Model
 final class Workout {
     var name: String
-    var items: [WorkoutItem] = []
+    var sets: Int
+    var betweenSets: Int
+    var items: [WorkoutItem]
     
-    init(name: String, items: [WorkoutItem]) {
+    init(name: String, sets: Int, betweenSets: Int, items: [WorkoutItem]) {
         self.name = name
+        self.sets = sets
+        self.betweenSets = betweenSets
         self.items = items
     }
 }
