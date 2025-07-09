@@ -25,7 +25,7 @@ struct NewWorkoutItemView: View {
                     }
                 }
                 
-                TextField(selectedType == .reps ? "Amount" : "Seconds", text: $value)
+                TextField(selectedType.rawValue.capitalized, text: $value)
                     .keyboardType(.numberPad)
             }
             

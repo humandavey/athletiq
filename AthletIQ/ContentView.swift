@@ -15,6 +15,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
+                NavigationLink {
+                    CreateWorkoutView()
+                } label: {
+                    Label("Create Workout", systemImage: "plus")
+                }
                 ForEach(workouts) { workout in
                     NavigationLink {
                         StartWorkoutView(workout: workout)
@@ -23,15 +28,6 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem {
-                    NavigationLink {
-                        CreateWorkoutView()
-                    } label: {
-                        Label("Create Workout", systemImage: "plus")
-                    }
-                }
             }
             .navigationTitle("Workouts")
         }
