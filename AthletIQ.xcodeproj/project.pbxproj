@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5A9CA3302E1E227400C97078 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 5A9CA32F2E1E226C00C97078 /* readme.md */; };
+		5A9CA3322E1E227E00C97078 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A9CA3312E1E227900C97078 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5A9CA2EB2E1E058100C97078 /* AthletIQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AthletIQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A9CA32F2E1E226C00C97078 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		5A9CA3312E1E227900C97078 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +39,8 @@
 		5A9CA2E22E1E058100C97078 = {
 			isa = PBXGroup;
 			children = (
+				5A9CA3312E1E227900C97078 /* .gitignore */,
+				5A9CA32F2E1E226C00C97078 /* readme.md */,
 				5A9CA2ED2E1E058100C97078 /* AthletIQ */,
 				5A9CA2EC2E1E058100C97078 /* Products */,
 			);
@@ -109,6 +118,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9CA3302E1E227400C97078 /* readme.md in Resources */,
+				5A9CA3322E1E227E00C97078 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
