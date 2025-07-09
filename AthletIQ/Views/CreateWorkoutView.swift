@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CreateWorkoutView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
+    @Query private var workouts: [Workout]
     @State private var name = ""
     @State private var sets = ""
     @State private var betweenSets = ""
@@ -45,7 +47,7 @@ struct CreateWorkoutView: View {
                 Section {
                     Button {
                         if !name.isEmpty && !sets.isEmpty && !betweenSets.isEmpty {
-                            modelContext.insert(Workout(name: name, sets: Int(sets)!, betweenSets: Int(betweenSets)!, items: workoutItems))
+                            modelContext.insert(Workout(name: name, sets: Int(sets)!, betweenSets: Int(betweenSets)!, items: workoutItems, index: workouts.count))
                             
                             dismiss()
                         } else {

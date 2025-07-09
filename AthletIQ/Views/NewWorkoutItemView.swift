@@ -31,7 +31,7 @@ struct NewWorkoutItemView: View {
             
             Section {
                 Button {
-                    items.append(WorkoutItem(name: itemName, type: selectedType, value: Int(value)!))
+                    items.append(WorkoutItem(name: itemName, type: selectedType, value: Int(value)!, index: items.count))
                     dismiss()
                 } label: {
                     Text("Add To Workout")

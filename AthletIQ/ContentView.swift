@@ -20,9 +20,9 @@ struct ContentView: View {
                 } label: {
                     Label("Create Workout", systemImage: "plus")
                 }
-                ForEach(workouts) { workout in
+                ForEach(workouts.sorted { $0.index < $1.index }) { workout in
                     NavigationLink {
-                        StartWorkoutView(workout: workout)
+                        WorkoutInfoView(workout: workout)
                     } label: {
                         Text(workout.name)
                     }

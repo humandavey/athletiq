@@ -1,5 +1,5 @@
 //
-//  StartWorkoutView.swift
+//  WorkoutInfoView.swift
 //  AthletIQ
 //
 //  Created by Davey Adams on 7/8/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StartWorkoutView: View {
+struct WorkoutInfoView: View {
     @State var workout: Workout
     
     func getTimeString() -> String {
@@ -28,7 +28,7 @@ struct StartWorkoutView: View {
         NavigationStack {
             Form {
                 Section {
-                    ForEach(workout.items) { exercise in
+                    ForEach(workout.items.sorted { $0.index < $1.index }) { exercise in
                         HStack {
                             Text(exercise.name)
                             Spacer()
@@ -37,7 +37,6 @@ struct StartWorkoutView: View {
                     }
                     
                     if workout.sets > 0 {
-                        Text("Rest for \(workout.betweenSets) seconds")
                         Text("Repeat \(workout.sets) times")
                     }
                 }
@@ -49,10 +48,17 @@ struct StartWorkoutView: View {
                         Text(getTimeString())
                     }
                     
+                    if workout.currentIndex > 0 {
+                        NavigationLink {
+                            GuidedWorkoutView(workout: $workout)
+                        } label: {
+                            Label("Restart Workout", systemImage: "arrow.counterclockwise")
+                        }
+                    }
                     NavigationLink {
-                        
+                        GuidedWorkoutView(workout: $workout)
                     } label: {
-                        Label("Start Workout", systemImage: "play.fill")
+                        Label(workout.currentIndex > 0 ? "Resume Workout" : "Start Workout", systemImage: "play.fill")
                     }
                 }
             }
