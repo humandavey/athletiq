@@ -1,6 +1,6 @@
 # AthletIQ
 
-AtletIQ is a iOS app that allows users to create workouts with exercises and follow them with a built-in timer.
+AthletIQ is a iOS app that allows users to create workouts with exercises and follow them with a built-in timer.
 
 ## Features
 
