@@ -15,7 +15,7 @@ struct CreateWorkoutView: View {
     @State private var name = ""
     @State private var sets = ""
     @State private var betweenSets = ""
-    @State private var workoutItems: [WorkoutItem] = []
+    @State private var exercises: [Exercise] = []
     @State private var showAlert = false
     
     var body: some View {
@@ -30,15 +30,15 @@ struct CreateWorkoutView: View {
                 }
                 
                 List {
-                    ForEach(workoutItems) { item in
+                    ForEach(exercises) { exercise in
                         HStack {
-                            Text(item.name)
+                            Text(exercise.name)
                             Spacer()
-                            Text("\(item.value) \(item.type.rawValue)")
+                            Text("\(exercise.value) \(exercise.type.rawValue)")
                         }
                     }
                     NavigationLink {
-                        NewWorkoutItemView(items: $workoutItems)
+                        AddExerciseView(exercises: $exercises)
                     } label: {
                         Label("Add Exercise", systemImage: "plus")
                     }
@@ -47,7 +47,7 @@ struct CreateWorkoutView: View {
                 Section {
                     Button {
                         if !name.isEmpty && !sets.isEmpty && !betweenSets.isEmpty {
-                            modelContext.insert(Workout(name: name, sets: Int(sets)!, betweenSets: Int(betweenSets)!, items: workoutItems, index: workouts.count))
+                            modelContext.insert(Workout(name: name, sets: Int(sets)!, betweenSets: Int(betweenSets)!, exercises: exercises, index: workouts.count))
                             
                             dismiss()
                         } else {

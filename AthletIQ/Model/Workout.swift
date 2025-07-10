@@ -14,17 +14,17 @@ final class Workout {
     var name: String
     var sets: Int
     var betweenSets: Int
-    var items: [WorkoutItem]
+    var exercises: [Exercise]
     var currentIndex = 0
     var totalTime: Double {
         var time = 0.0
         
-        for item in items {
-            switch item.type {
+        for exercise in exercises {
+            switch exercise.type {
             case .timed:
-                time += Double(item.value) / 60.0
+                time += Double(exercise.value) / 60.0
             case .reps:
-                time += 3.0 * Double(item.value) / 60.0
+                time += 3.0 * Double(exercise.value) / 60.0
             }
         }
         time *= Double(sets)
@@ -32,18 +32,18 @@ final class Workout {
         return time
     }
     
-    init(name: String, sets: Int, betweenSets: Int, items: [WorkoutItem], index: Int) {
+    init(name: String, sets: Int, betweenSets: Int, exercises: [Exercise], index: Int) {
         self.name = name
         self.sets = sets
         self.betweenSets = betweenSets
-        self.items = items
+        self.exercises = exercises
         self.index = index
         
-        for item in items {
-            item.index += 1
+        for exercise in exercises {
+            exercise.index += 1
         }
         
-        self.items.insert(WorkoutItem(name: "Break", type: .timed, value: 5, index: 0), at: 0)
-        self.items.append(WorkoutItem(name: "Break", type: .timed, value: betweenSets, index: self.items.count))
+        self.exercises.insert(Exercise(name: "Break", type: .timed, value: 5, index: 0, hidden: true), at: 0)
+        self.exercises.append(Exercise(name: "Break", type: .timed, value: betweenSets, index: self.exercises.count))
     }
 }

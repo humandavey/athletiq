@@ -28,11 +28,13 @@ struct WorkoutInfoView: View {
         NavigationStack {
             Form {
                 Section {
-                    ForEach(workout.items.sorted { $0.index < $1.index }) { exercise in
-                        HStack {
-                            Text(exercise.name)
-                            Spacer()
-                            Text("\(exercise.value) \(exercise.type.rawValue.capitalized)")
+                    ForEach(workout.exercises.sorted { $0.index < $1.index }) { exercise in
+                        if !exercise.hidden {
+                            HStack {
+                                Text(exercise.name)
+                                Spacer()
+                                Text("\(exercise.value) \(exercise.type.rawValue.capitalized)")
+                            }
                         }
                     }
                     
@@ -48,17 +50,10 @@ struct WorkoutInfoView: View {
                         Text(getTimeString())
                     }
                     
-                    if workout.currentIndex > 0 {
-                        NavigationLink {
-                            GuidedWorkoutView(workout: $workout)
-                        } label: {
-                            Label("Restart Workout", systemImage: "arrow.counterclockwise")
-                        }
-                    }
                     NavigationLink {
                         GuidedWorkoutView(workout: $workout)
                     } label: {
-                        Label(workout.currentIndex > 0 ? "Resume Workout" : "Start Workout", systemImage: "play.fill")
+                        Label("Start Workout", systemImage: "play.fill")
                     }
                 }
             }

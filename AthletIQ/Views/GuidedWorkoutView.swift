@@ -13,8 +13,8 @@ struct GuidedWorkoutView: View {
     @State var counter = 0
     @State var paused = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    var currentItem: WorkoutItem {
-        workout.items.sorted { $0.index < $1.index }[workout.currentIndex % workout.items.count]
+    var currentExercise: Exercise {
+        workout.exercises.sorted { $0.index < $1.index }[workout.currentIndex % workout.exercises.count]
     }
     
     var body: some View {
@@ -23,13 +23,13 @@ struct GuidedWorkoutView: View {
                 Form {
                     HStack {
                         Spacer()
-                        Text(currentItem.name)
+                        Text(currentExercise.name)
                         Spacer()
                     }
                 }
                 
                 VStack {
-                    ProgressView(value: Double(workout.currentIndex) / Double(workout.items.count * workout.sets - 1))
+                    ProgressView(value: Double(workout.currentIndex) / Double(workout.exercises.count * workout.sets - 1))
                         .padding()
                     Spacer()
                 }
@@ -38,11 +38,11 @@ struct GuidedWorkoutView: View {
                     Spacer()
                     Spacer()
                     
-                    Text(String(currentItem.value - counter))
+                    Text(String(currentExercise.value - counter))
                         .font(.system(size: 80, weight: .bold))
                         .padding()
                         .onTapGesture {
-                            if currentItem.type == .reps {
+                            if currentExercise.type == .reps {
                                 workout.currentIndex += 1
                                 counter = 0
                             }
@@ -70,7 +70,7 @@ struct GuidedWorkoutView: View {
                         }
                         
                         Button {
-                            if workout.currentIndex > workout.sets * workout.items.count - 2 {
+                            if workout.currentIndex > workout.sets * workout.exercises.count - 2 {
                                 workout.currentIndex = 0
                                 counter = 0
                                 dismiss()
@@ -89,12 +89,12 @@ struct GuidedWorkoutView: View {
             }
         }
         .onReceive(timer) { _ in
-            if currentItem.type == .timed && !paused {
+            if currentExercise.type == .timed && !paused {
                 counter += 1
             }
             
-            if currentItem.value - counter < 0 {
-                if workout.currentIndex > workout.sets * workout.items.count - 2 {
+            if currentExercise.value - counter < 0 {
+                if workout.currentIndex > workout.sets * workout.exercises.count - 2 {
                    workout.currentIndex = 0
                    counter = 0
                    dismiss()

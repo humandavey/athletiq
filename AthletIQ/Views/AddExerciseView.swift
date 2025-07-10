@@ -1,5 +1,5 @@
 //
-//  NewWorkoutItemView.swift
+//  AddExerciseView.swift
 //  AthletIQ
 //
 //  Created by Davey Adams on 7/8/25.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct NewWorkoutItemView: View {
+struct AddExerciseView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var items: [WorkoutItem]
-    @State var itemName = ""
-    @State var selectedType: WorkoutType = .reps
+    @Binding var exercises: [Exercise]
+    @State var exerciseName = ""
+    @State var selectedType: ExerciseType = .reps
     @State var value = ""
     
     var body: some View {
         Form {
             Section {
-                TextField("Exercise Name", text: $itemName)
+                TextField("Exercise Name", text: $exerciseName)
                 
                 Picker("Exercise Type", selection: $selectedType) {
-                    ForEach(WorkoutType.allCases) { type in
+                    ForEach(ExerciseType.allCases) { type in
                         Text(type.rawValue.capitalized)
                     }
                 }
@@ -31,7 +31,7 @@ struct NewWorkoutItemView: View {
             
             Section {
                 Button {
-                    items.append(WorkoutItem(name: itemName, type: selectedType, value: Int(value)!, index: items.count))
+                    exercises.append(Exercise(name: exerciseName, type: selectedType, value: Int(value)!, index: exercises.count))
                     dismiss()
                 } label: {
                     Text("Add To Workout")
